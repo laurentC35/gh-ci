@@ -1,6 +1,9 @@
-name: CI-active-branches
+name: CI on Main
 
-on: [push]
+on:
+  push:
+    branches:
+      - 'main
 
 jobs:
   update-branches:
