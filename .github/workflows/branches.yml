@@ -3,34 +3,34 @@ name: Branches
 on:
   pull_request:
     types: [opened, reopened, closed]
-    branches: ["main"]
+    branches: ["main", "develop"]
 
 jobs:
-  add-branches:
+  Update branches:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         with:
           ref: gh-pages
-      - run: mkdir -p deploy
+      - run: mkdir -p deploy-pr
       - run: |
           if [ ${{github.event.pull_request.state}} = 'open' ]; then
             echo "Adding ${{github.head_ref}} to active branches"
-            jq '.branches += ["${{github.head_ref}}"]' active-branches.json > deploy/active-branches.json
+            jq '.branches += ["${{github.head_ref}}"]' active-branches.json > deploy-pr/pr/active-branches.json
           fi
           if [ ${{github.event.pull_request.state}} = 'closed' ]; then
             echo "Removing ${{github.head_ref}} to active branches"
-            jq '.branches -= ["${{github.head_ref}}"]' active-branches.json > deploy/active-branches.json
+            jq '.branches -= ["${{github.head_ref}}"]' active-branches.json > deploy-pr/pr/active-branches.json
           fi
       - name: Upload deploy artifact
         uses: actions/upload-artifact@v3
         with:
-          name: deploy
-          path: deploy/
+          name: deploy-pr
+          path: deploy-pr/
 
   deploy:
     runs-on: ubuntu-latest
-    needs: add-branches
+    needs: Update branches
     steps:
       - uses: actions/checkout@v3
         with:
