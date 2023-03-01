@@ -1,3 +1,6 @@
 {
-  "branches": ["main"]
+  "branches": [
+    "main",
+    "fix/improve-ci"
+  ]
 }
