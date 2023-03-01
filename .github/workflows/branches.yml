@@ -1,0 +1,22 @@
+name: Branches
+
+on:
+  pull_request_target:
+    types:
+      - opened
+    branches:
+      - "test/**"
+      - "feat/**"
+      - "fix/**"
+      - "doc/**"
+      - "ref/**"
+
+jobs:
+  update-branches:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
+      - run: echo "Current branch of PR is ${{steps.extract_branch.outputs.branch}}"
