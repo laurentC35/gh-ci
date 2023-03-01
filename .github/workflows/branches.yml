@@ -6,7 +6,7 @@ on:
     branches: ["main", "develop"]
 
 jobs:
-  update-branches:
+  update-branches-on-gh-pages:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -16,29 +16,13 @@ jobs:
       - run: |
           if [ ${{github.event.pull_request.state}} = 'open' ]; then
             echo "Adding ${{github.head_ref}} to active branches"
-            jq '.branches += ["${{github.head_ref}}"]' active-branches.json > deploy-pr/pr/active-branches.json
+            jq '.branches += ["${{github.head_ref}}"]' pr/active-branches.json > temp.json
           fi
           if [ ${{github.event.pull_request.state}} = 'closed' ]; then
             echo "Removing ${{github.head_ref}} to active branches"
-            jq '.branches -= ["${{github.head_ref}}"]' active-branches.json > deploy-pr/pr/active-branches.json
+            jq '.branches -= ["${{github.head_ref}}"]' pr/active-branches.json > temp.json
           fi
-      - name: Upload deploy artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: deploy-pr
-          path: deploy-pr/
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: update-branches
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          ref: gh-pages
-      - name: Download deploy artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: deploy-pr
+          mv temp.json pr/active-branches.json
       - name: Commit & Push changes
         uses: actions-js/push@master
         with:
