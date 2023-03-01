@@ -3,7 +3,7 @@ name: CI on Main
 on:
   push:
     branches:
-      - 'main
+      - "main"
 
 jobs:
   update-branches:
