@@ -38,7 +38,7 @@ jobs:
       - name: Download deploy artifact
         uses: actions/download-artifact@v3
         with:
-          name: deploy
+          name: deploy-pr
       - name: Commit & Push changes
         uses: actions-js/push@master
         with:
