@@ -1,7 +1,5 @@
 {
   "branches": [
-    "main",
-    "fix/improve-ci",
-    "fix/improve-ci"
+    "main"
   ]
 }
