@@ -16,7 +16,7 @@ jobs:
         with:
           ref: gh-pages
       - run: |
-          jq '.branches += ["${{github.head_ref}}""]' active-branches.json > temp.json
+          jq '.branches += ["${{github.head_ref}}"]' active-branches.json > temp.json
           mv temp.json active-branches.json
       - run: cp -a ./active-branches.json ./deploy
       - name: Upload deploy artifact
