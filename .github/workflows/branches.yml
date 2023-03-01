@@ -3,7 +3,6 @@ name: Branches
 on:
   pull_request:
     types: [opened, reopened]
-    branches: ["test/**", "feat/**", "fix/**", "doc/**", "ref/**"]
 
 jobs:
   update-branches:
