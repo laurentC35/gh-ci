@@ -10,13 +10,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "A - Current branch of PR is ${{github.head_ref}}"
-      - run: echo "B - PR TYpe is ${{github.event.pull_request}}"
+      - run: echo "Opened - ${{github.event.pull_request.opened}}"
+      - run: echo "Reopened - ${{github.event.pull_request.reopened}}"
+      - run: echo "Closed - ${{github.event.pull_request.closed}}"
       - uses: actions/checkout@v3
         with:
           ref: gh-pages
+      - run: mkdir -p deploy
       - run: |
-          jq '.branches += ["${{github.head_ref}}"]' ./active-branches.json
-      - run: cp -a ./active-branches.json ./deploy
+          jq '.branches += ["${{github.head_ref}}"]' active-branches.json > deploy/active-branches.json
       - name: Upload deploy artifact
         uses: actions/upload-artifact@v3
         with:
