@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           ref: gh-pages
-      - run: mkdir -p deploy-pr
+      - run: mkdir -p deploy-pr/pr
       - run: |
           if [ ${{github.event.pull_request.state}} = 'open' ]; then
             echo "Adding ${{github.head_ref}} to active branches"
