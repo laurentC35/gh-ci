@@ -16,4 +16,5 @@ jobs:
         with:
           ref: gh-pages
       - run: |
-          jq .branches[] active-branches.json  -r
+          jq '.branches += ["${{github.head_ref}}""]' active-branches.json > temp.json
+          mv temp.json active-branches.json
