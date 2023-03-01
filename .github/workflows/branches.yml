@@ -9,17 +9,17 @@ jobs:
   add-branches:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Current branch of PR is ${{github.head_ref}}"
-      - run: echo "State - ${{github.event.pull_request.state}}"
       - uses: actions/checkout@v3
         with:
           ref: gh-pages
       - run: mkdir -p deploy
       - run: |
           if [ ${{github.event.pull_request.state}} = 'open' ]; then
+            echo "Adding ${{github.head_ref}} to active branches"
             jq '.branches += ["${{github.head_ref}}"]' active-branches.json > deploy/active-branches.json
           fi
           if [ ${{github.event.pull_request.state}} = 'closed' ]; then
+            echo "Removing ${{github.head_ref}} to active branches"
             jq '.branches -= ["${{github.head_ref}}"]' active-branches.json > deploy/active-branches.json
           fi
       - name: Upload deploy artifact
