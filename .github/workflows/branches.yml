@@ -6,7 +6,7 @@ on:
     branches: ["main", "develop"]
 
 jobs:
-  Update branches:
+  update-branches:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -30,7 +30,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
-    needs: Update branches
+    needs: update-branches
     steps:
       - uses: actions/checkout@v3
         with:
