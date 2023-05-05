@@ -6,7 +6,7 @@ on:
     paths: ['package.json']
 
 jobs:
-  src_modified:
+  package_json:
     runs-on: ubuntu-latest
 
     steps:
