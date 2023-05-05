@@ -2,7 +2,7 @@ name: Version changed
 
 on:
   pull_request:
-    branches: ["main", "develop"]
+    branches: ["sd", "develop"]
 
 jobs:
   job1:
@@ -18,7 +18,7 @@ jobs:
           prop_path: 'version'      
       - uses: actions/checkout@v3
         with:
-          ref: github.event.pull_request.base.ref
+          ref: ${{ github.event.pull_request.base.ref }}
       - name: Get current package version
         id: old_version
         uses: notiz-dev/github-action-json-property@release
