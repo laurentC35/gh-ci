@@ -5,6 +5,7 @@
 	"description": "Library of questionnaire components",
 	"repository": {
 		"type": "git",
+		
 		"url": "https://github.com/InseeFr/Lunatic.git"
 	},
 	"author": "INSEE (http://www.insee.fr)",
