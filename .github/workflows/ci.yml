@@ -2,6 +2,7 @@ name: CI on Main
 
 on:
   push:
+    branches: ['main']
     paths: ['package.json']
 
 jobs:
@@ -9,4 +10,4 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - run: echo "Packahge change""
+      - run: echo "Packahge change"
