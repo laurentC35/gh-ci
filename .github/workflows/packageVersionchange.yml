@@ -8,9 +8,6 @@ jobs:
     steps:
       - run: echo "Target branch ${{ github.event.pull_request.base.ref }}"
       - uses: actions/checkout@v3
-        with:
-          path: 'new'
-      - run: cd new
       - name: Get current package version
         id: new_version
         uses: notiz-dev/github-action-json-property@release
@@ -19,9 +16,7 @@ jobs:
           prop_path: 'version'      
       - uses: actions/checkout@v3
         with:
-          path: 'old'
           ref: github.event.pull_request.base.ref || main
-      - run:  cd ../old
       - name: Get current package version
         id: old_version
         uses: notiz-dev/github-action-json-property@release
