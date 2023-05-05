@@ -16,13 +16,13 @@ jobs:
     needs:
       - check_change_version
     steps:
-      - run: echo "Version has changed ? ${{ needs.check_if_version_changed.outputs.if_version_changed }}"
-      - run: echo "Version is ${{ needs.check_if_version_changed.outputs.to_version }}"
+      - run: echo "Version has changed ? ${{ needs.check_change_version.outputs.if_version_changed }}"
+      - run: echo "Version is ${{ needs.check_change_version.outputs.to_version }}"
 
   deploy-on-if:   
     runs-on: ubuntu-latest
     needs:
       - check_change_version
-    if: ${{ needs.check_if_version_changed.outputs.if_version_changed == 'true' }} 
+    if: ${{ needs.check_change_version.outputs.if_version_changed == 'true' }} 
     steps:
       - run: echo "Version has changed !"
