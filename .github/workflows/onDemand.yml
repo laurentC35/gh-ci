@@ -20,6 +20,7 @@ jobs:
             echo "The commit convention is not respected / Unable to publish see the readme"
             exit 1
           fi
+          
   publish_on_npm:
     if: github.repository == 'laurentC35/gh-ci'
     needs: check_conventional_commit
