@@ -3,10 +3,14 @@ name: Version changed
 on:
   pull_request:
     branches: ["main", "develop"]
+  paths: ['package.json']
 
 jobs:
   check_if_version_changed:
     runs-on: ubuntu-latest
+    outputs:
+      to_version: ${{ steps.new_version.outputs.prop }}
+      if_version_changed: ${{ steps.compare.outputs.changed }}
     steps:
       - uses: actions/checkout@v3
       - name: Get new version
@@ -25,9 +29,27 @@ jobs:
           path: 'package.json'
           prop_path: 'version'      
       - name: Compare version
+        id: compare
         run: |
           if [[ "${{steps.old_version.outputs.prop}}" == "${{steps.new_version.outputs.prop}}" ]]; then
             echo "Package version has not changed. Version is actually ${{steps.old_version.outputs.prop}}"
             echo "Please upgrade version"
-            exit 1
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
+  deploy1:   
+    runs-on: ubuntu-latest
+    needs:
+      - check_if_version_changed
+    steps:
+      - run: echo "Version has changed ? ${{ needs.check_if_version_changed.outputs.chnaged }}"
+      - run: echo "Version is ${{ needs.check_if_version_changed.outputs.to_version }}"
+
+   deploy2:   
+    runs-on: ubuntu-latest
+    needs:
+      - check_if_version_changed
+    if: ${{ needs.check_if_version_changed.outputs.changed }} == 'true'
+    steps:
+      - name: echo "Version has changed !"
