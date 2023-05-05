@@ -26,8 +26,8 @@ jobs:
           prop_path: 'version'      
       - name: Compare version
         run: |
-          if [[ ${{steps.old_version.outputs.prop}} == ${{steps.new_version.outputs.prop}} ]]; then
+          if [[ "${{steps.old_version.outputs.prop}}" == "${{steps.new_version.outputs.prop}}" ]]; then
             echo "Package version has not changed. Version is actually ${{steps.old_version.outputs.prop}}"
-            echo "Please, upgrade version"
+            echo "Please upgrade version"
             exit 1
           fi
