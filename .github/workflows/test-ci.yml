@@ -1,0 +1,13 @@
+name: CI on Main
+
+on:
+  push:
+    branches:
+      - "develop"
+
+jobs:
+  simple-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Simple message
+        run: echo "Coucou toi !"
