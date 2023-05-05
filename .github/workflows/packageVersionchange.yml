@@ -11,7 +11,7 @@ on:
         type: string
     outputs:
       to_version:
-        to_version: "The new version"
+        description: "The new version"
         value: ${{ jobs.check_if_version_changed.outputs.to_version }}
       if_version_changed:
         description: "If version has changed"
