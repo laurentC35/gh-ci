@@ -2,7 +2,6 @@
   "branches": [
     "main",
     "dependabot/test-ci",
-    "dependabot/test-ci",
-    "develop"
+    "dependabot/test-ci"
   ]
 }
