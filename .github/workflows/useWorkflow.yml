@@ -6,7 +6,7 @@ on:
 
 jobs:
   check_if_version_changed:
-    uses: ./.github/workflows/packageVersionchange.yml
+    uses: ./.github/workflows/test-change-version.yml
     with:
       current_branch: ${{ github.ref }}
       target_branch: ${{ github.event.pull_request.base.ref }}
