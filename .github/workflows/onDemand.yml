@@ -5,8 +5,22 @@ on:
 
 
 jobs:
+  check_conventional_commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check conventional commit
+        run: |
+          COMMIT_MSG=$(git log -1 --pretty=%B)
+          if [[ $COMMIT_MSG =~ Publish:[[:space:]](.*) ]]; 
+          then
+            echo "The commit convention is respected with suffix version: ${BASH_REMATCH[1]}"
+          else
+            echo "The commit convention is not respected / Unable to publish see the readme"
+            exit 1
+          fi
   publish_on_npm:
     if: github.repository == 'laurentC35/gh-ci'
+    needs: check_conventional_commit
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
