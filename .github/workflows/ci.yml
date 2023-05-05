@@ -2,14 +2,11 @@ name: CI on Main
 
 on:
   push:
-    branches:
-      - "main"
+    paths:
+      - 'src/**'
 
 jobs:
-  update-branches:
+  src_modified:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-        with:
-          ref: main
-      - run: echo "Nothing to do"
+      - run: echo "a file under src has changed !"
