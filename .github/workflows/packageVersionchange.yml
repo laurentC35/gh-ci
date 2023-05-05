@@ -49,6 +49,6 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - check_if_version_changed
-    if: ${{ needs.check_if_version_changed.outputs.if_version_changed }} == 'true'
+    if: ${{ needs.check_if_version_changed.outputs.if_version_changed == 'true' }} 
     steps:
       - run: echo "Version has changed !"
