@@ -2,6 +2,7 @@
   "branches": [
     "main",
     "dependabot/test-ci",
-    "dependabot/test-ci"
+    "dependabot/test-ci",
+    "fix/improve-ci"
   ]
 }
