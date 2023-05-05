@@ -8,16 +8,14 @@ jobs:
   check_conventional_commit:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
       - name: Check conventional commit
         run: |
-          COMMIT_MSG=$(git log -1 --pretty=%B)
-          if [[ $COMMIT_MSG =~ Publish:[[:space:]](.*) ]]; 
+          if [[ ${{ github.event.head_commit.message }} =~ Publish:[[:space:]](.*) ]]; 
           then
             echo "The commit convention is respected with suffix version: ${BASH_REMATCH[1]}"
           else
-            echo "The commit convention is not respected. Pattern is \"Publish: custom-suffix\""
+            echo "The commit convention is not respected. Pattern is \"Publish: yourCustomSuffix\""
+            echo "Your message is : ${{ github.event.head_commit.message }}"
             exit 1
           fi
 
@@ -37,15 +35,15 @@ jobs:
       - name: Get custom version
         run: |
           COMMIT_MSG=$(git log -1 --pretty=%B)
-            if [[ $COMMIT_MSG =~ Publish:[[:space:]](.*) ]]; 
-            then
-              NEW_VERSION=${{steps.version.outputs.prop}}-${BASH_REMATCH[1]}
-              echo "Commit message is: $COMMIT_MSG"
-              echo "New version is: $NEW_VERSION"
-              git config --global user.email "no-reply@insee.fr"
-              git config --global user.name "Insee"
-              yarn version --new-version $NEW_VERSION
-            fi
+          if [[ $COMMIT_MSG =~ Publish:[[:space:]](.*) ]]; 
+          then
+            NEW_VERSION=${{steps.version.outputs.prop}}-${BASH_REMATCH[1]}
+            echo "Commit message is: $COMMIT_MSG"
+            echo "New version is: $NEW_VERSION"
+            git config --global user.email "no-reply@insee.fr"
+            git config --global user.name "Insee"
+            yarn version --new-version $NEW_VERSION
+          fi
       - run: yarn build
       - name: Publishing on NPM
         run: |
