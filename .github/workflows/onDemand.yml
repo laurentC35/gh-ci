@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Check conventional commit
         run: |
-          if [[ ${{ github.event.head_commit.message }} =~ Publish:[[:space:]](.*) ]]; 
+          if [[ "${{ github.event.head_commit.message }}" =~ Publish:[[:space:]](.*) ]]; 
           then
             echo "The commit convention is respected with suffix version: ${BASH_REMATCH[1]}"
           else
