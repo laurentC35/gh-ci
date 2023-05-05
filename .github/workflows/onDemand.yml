@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Check conventional commit
         run: |
-          if [[ "${{ github.event.head_commit.message }}" =~ Publish:[[:space:]](\S*)]]; 
+          if [[ "${{ github.event.head_commit.message }}" =~ Publish:[[:space:]](\S*) ]]; 
           then
             echo "The commit convention is respected with suffix version: ${BASH_REMATCH[1]}"
           else
@@ -33,7 +33,7 @@ jobs:
           prop_path: 'version'
       - name: Get custom version
         run: |
-          if [[ "${{ github.event.head_commit.message }}" =~ Publish:[[:space:]](\S*)]]; 
+          if [[ "${{ github.event.head_commit.message }}" =~ Publish:[[:space:]](\S*) ]]; 
           then
             NEW_VERSION=${{steps.version.outputs.prop}}-${BASH_REMATCH[1]}
             echo "Commit message is: $COMMIT_MSG"
