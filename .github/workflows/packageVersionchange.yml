@@ -12,10 +12,10 @@ on:
     outputs:
       to_version:
         description: "The new version"
-        value: ${{ jobs.check_if_version_changed.outputs.to_version }}
+        value: ${{ jobs.test.outputs.to_version }}
       if_version_changed:
         description: "If version has changed"
-        value: ${{ jobs.check_if_version_changed.outputs.if_version_changed }}
+        value: ${{ jobs.test.outputs.if_version_changed }}
 
 jobs:
   test:
