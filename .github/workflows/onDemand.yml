@@ -17,10 +17,10 @@ jobs:
           then
             echo "The commit convention is respected with suffix version: ${BASH_REMATCH[1]}"
           else
-            echo "The commit convention is not respected / Unable to publish see the readme"
+            echo "The commit convention is not respected. Pattern is \"Publish: custom-suffix\""
             exit 1
           fi
-          
+
   publish_on_npm:
     if: github.repository == 'laurentC35/gh-ci'
     needs: check_conventional_commit
@@ -28,8 +28,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-        with:
-          ref: ${{ github.ref }}
       - name: Get current package version
         id: version
         uses: notiz-dev/github-action-json-property@release
@@ -47,9 +45,6 @@ jobs:
               git config --global user.email "no-reply@insee.fr"
               git config --global user.name "Insee"
               yarn version --new-version $NEW_VERSION
-            else
-              echo "The commit convention is not respected / Unable to publish see the readme"
-              exit 1
             fi
       - run: yarn build
       - name: Publishing on NPM
