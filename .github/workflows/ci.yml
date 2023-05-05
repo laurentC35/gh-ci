@@ -2,14 +2,12 @@ name: CI on Main
 
 on:
   push:
-    branches:
-      - "main"
+    branches: ['main', 'develop']
+    paths: ['package.json']
 
 jobs:
-  update-branches:
+  package_json:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
-        with:
-          ref: main
-      - run: echo "Nothing to do"
+      - run: echo "Packahge change"
