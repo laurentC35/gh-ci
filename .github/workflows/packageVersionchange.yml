@@ -18,7 +18,7 @@ on:
         value: ${{ jobs.check_if_version_changed.outputs.if_version_changed }}
 
 jobs:
-  check_if_version_changed:
+  test:
     runs-on: ubuntu-latest
     outputs:
       to_version: ${{ steps.new_version.outputs.prop }}
