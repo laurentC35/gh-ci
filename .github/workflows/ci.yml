@@ -2,12 +2,11 @@ name: CI on Main
 
 on:
   push:
-    paths:
-      - 'src/**'
+    paths: ['package.json']
 
 jobs:
   src_modified:
     runs-on: ubuntu-latest
-    
+
     steps:
-      - run: echo "a file under src has changed !"
+      - run: echo "Packahge change""
