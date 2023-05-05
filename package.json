@@ -1,6 +1,6 @@
 {
 	"name": "@inseefr/test",
-	"version": "3.0.0",
+	"version": "3.0.1",
 	"workersVersion": "0.2.4-experimental",
 	"description": "Library of questionnaire components",
 	"repository": {
