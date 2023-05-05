@@ -1,11 +1,11 @@
 {
-	"name": "@inseefr/lunatic",
+	"name": "@inseefr/xffvx",
 	"version": "2.0.7-v2",
 	"workersVersion": "0.2.4-experimental",
 	"description": "Library of questionnaire components",
 	"repository": {
 		"type": "git",
-		
+
 		"url": "https://github.com/InseeFr/Lunatic.git"
 	},
 	"author": "INSEE (http://www.insee.fr)",
