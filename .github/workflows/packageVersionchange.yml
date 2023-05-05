@@ -51,4 +51,4 @@ jobs:
       - check_if_version_changed
     if: ${{ needs.check_if_version_changed.outputs.changed }} == 'true'
     steps:
-      - name: echo "Version has changed !"
+      - run: echo "Version has changed !"
