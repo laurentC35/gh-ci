@@ -32,7 +32,7 @@ jobs:
           git config --global user.email "no-reply@insee.fr"
           git config --global user.name "Insee"
 
-          echo "ref : ${{github.ref}"
+          echo "ref : ${{github.ref}}"
 
           case ${{github.ref}} in
             'refs/heads/main' )
