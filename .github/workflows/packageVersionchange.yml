@@ -2,7 +2,7 @@ name: Version changed
 
 on:
   pull_request:
-    branches: ["sd", "develop"]
+    branches: ["main", "develop"]
 
 jobs:
   job1:
