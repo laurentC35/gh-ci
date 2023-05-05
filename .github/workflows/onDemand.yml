@@ -5,6 +5,15 @@ on:
 
 
 jobs:
+  job_skiped:
+    if: "'github.event.head_commit.message' =~ Publish:[[:space:]]([^[:space:]]*)"
+    
+    runs-on: ubuntu-latest
+    steps:
+      - name: Message
+        run: echo "coucou, c'est parti !"
+
+
   check_conventional_commit:
     runs-on: ubuntu-latest
     steps:
@@ -12,7 +21,7 @@ jobs:
         run: |
           if [[ "${{ github.event.head_commit.message }}" =~ Publish:[[:space:]]([^[:space:]]*) ]]; 
           then
-            echo "The commit convention is respected with suffix version: ${BASH_REMATCH[0]} ${BASH_REMATCH[1]}"
+            echo "The commit convention is respected with suffix version: ${BASH_REMATCH[1]}"
           else
             echo "The commit convention is not respected. Pattern is \"Publish: yourCustomSuffix\""
             echo "Your message is : ${{ github.event.head_commit.message }}"
