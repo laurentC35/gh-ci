@@ -6,8 +6,7 @@ on:
 
 jobs:
   job_skiped:
-    if: "'github.event.head_commit.message' =~ Publish:[[:space:]]([^[:space:]]*)"
-    
+    if: "'github.event.head_commit.message' =~ Publish:[[:space:]]([^[:space:]]*)"    
     runs-on: ubuntu-latest
     steps:
       - name: Message
