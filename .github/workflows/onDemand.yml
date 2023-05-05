@@ -18,6 +18,7 @@ jobs:
             echo "Your message is : ${{ github.event.head_commit.message }}"
             exit 1
           fi
+          
   publish_on_npm:
     if: github.repository == 'laurentC35/gh-ci'
     needs: check_conventional_commit
