@@ -32,16 +32,18 @@ jobs:
           git config --global user.email "no-reply@insee.fr"
           git config --global user.name "Insee"
 
+          echo "ref : ${{github.ref}"
+
           case ${{github.ref}} in
             'refs/heads/main' )
-              export TAG="latest"
-              export NEW_VERSION="${{steps.version.outputs.prop}}" ;;
+              export TAG=latest
+              export NEW_VERSION=${{steps.version.outputs.prop}} ;;
             'refs/heads/develop' )
-              export TAG="beta"
-              export NEW_VERSION="${{steps.version.outputs.prop}}-$TAG" ;;
+              export TAG=beta
+              export NEW_VERSION=${{steps.version.outputs.prop}}-$TAG ;;
             'refs/heads/prisme' )
-              export TAG="prisme"
-              export NEW_VERSION="${{steps.version.outputs.prop}}-$TAG" ;;
+              export TAG=prisme
+              export NEW_VERSION=${{steps.version.outputs.prop}}-$TAG ;;
           esac
           echo "New version : $NEW_VERSION"
           echo "TAG" : $TAG"
