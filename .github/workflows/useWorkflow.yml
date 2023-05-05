@@ -22,7 +22,7 @@ jobs:
   deploy-on-if:   
     runs-on: ubuntu-latest
     needs:
-      - check_if_version_changed
+      - check_change_version
     if: ${{ needs.check_if_version_changed.outputs.if_version_changed == 'true' }} 
     steps:
       - run: echo "Version has changed !"
