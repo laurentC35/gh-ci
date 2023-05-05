@@ -5,8 +5,17 @@ on:
     inputs:
       current_branch:
         required: true
+        type: string
       target_branch:
         required: true
+        type: string
+    outputs:
+      to_version:
+        to_version: "The new version"
+        value: ${{ jobs.check_if_version_changed.outputs.to_version }}
+      if_version_changed:
+        description: "If version has changed"
+        value: ${{ jobs.check_if_version_changed.outputs.if_version_changed }}
 
 jobs:
   check_if_version_changed:
